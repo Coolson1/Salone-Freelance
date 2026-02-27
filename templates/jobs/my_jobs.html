@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #10b981 0%, #34d399 100%) !important;
+  "
+>
+  <div
+    class="d-flex justify-content-between align-items-center flex-wrap gap-3"
+  >
+    <div>
+      <h1 class="display-4 mb-1">My Posted Jobs</h1>
+      <p class="lead mb-0">
+        Manage your jobs and track freelancer applications
+      </p>
+    </div>
+    <a href="{% url 'post_job' %}" class="btn btn-light btn-lg fw-bold"
+      >+ Post New Job</a
+    >
+  </div>
+</div>
+
+{% if jobs %}
+<div class="mb-4">
+  <h5>
+    You have <span class="badge bg-info">{{ jobs|length }}</span> active jobs
+  </h5>
+</div>
+
+<div class="row g-3">
+  {% for job in jobs %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        <p class="card-text text-muted small">
+          {{ job.description|truncatechars:100 }}
+        </p>
+        <p class="mb-1"><strong>💰 Budget:</strong> SLE {{ job.budget }}</p>
+        <p class="mb-3">
+          <strong>Status:</strong>
+          <span class="badge bg-{{ job.status }}"
+            >{{ job.status|capfirst }}</span
+          >
+        </p>
+      </div>
+      <div class="card-footer bg-white border-top">
+        <div class="d-flex gap-2 flex-wrap">
+          <a
+            class="btn btn-primary btn-sm flex-grow-1 d-flex align-items-center justify-content-center"
+            href="{% url 'job_applications' job.id %}"
+          >
+            View Applications {% if job.active_app_count > 0 %}
+            <span class="badge bg-secondary ms-2"
+              >{{ job.active_app_count }}</span
+            >
+            {% endif %}
+          </a>
+          {% if job.status != 'completed' %}
+          <form
+            method="post"
+            action="{% url 'complete_job' job.id %}"
+            style="display: inline; flex-grow: 1"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="btn btn-success btn-sm w-100"
+              onclick="return confirm('Mark this job as completed?');"
+            >
+              ✓ Complete
+            </button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="text-center py-5 bg-light rounded">
+  <h5 class="text-muted mb-3">📭 You haven't posted any jobs yet</h5>
+  <a href="{% url 'post_job' %}" class="btn btn-primary btn-lg"
+    >Post Your First Job</a
+  >
+</div>
+{% endif %} {% endblock %}

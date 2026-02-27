@@ -1,0 +1,130 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="row justify-content-center py-5">
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="mb-5 text-center">
+      <h1 class="display-5 fw-bold mb-2">Join Us 🚀</h1>
+      <p class="lead text-muted">
+        {% if role == 'client' %}Sign up as an Employer{% else %}Sign up as a
+        Freelancer{% endif %}
+      </p>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ error }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %}
+
+    <div class="alert alert-success" role="alert">
+      <small>
+        {% if role == 'client' %} ✅ Post jobs and hire talented freelancers {%
+        else %} ✅ Browse jobs and apply to opportunities {% endif %}
+      </small>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <form method="post" id="signupForm">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="first_name" class="form-label fw-bold"
+              >First Name</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="first_name"
+              name="first_name"
+              placeholder="Enter your first name"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="last_name" class="form-label fw-bold">Last Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="last_name"
+              name="last_name"
+              placeholder="Enter your last name"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="email" class="form-label fw-bold">Email Address</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="password" class="form-label fw-bold">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              placeholder="Minimum 4 characters"
+              required
+            />
+            <small class="text-muted d-block mt-2"
+              >Use a strong password for security</small
+            >
+          </div>
+
+          <button type="submit" class="btn btn-success btn-lg w-100 fw-bold">
+            Create My Account
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="text-muted mb-1">Already have an account?</p>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary btn-sm"
+        >Login here</a
+      >
+    </div>
+
+    <div class="alert alert-info alert-sm mt-4 mb-0" role="alert">
+      <small class="d-block text-center mb-0"
+        >🔒 Your data is secure and never spammed</small
+      >
+    </div>
+  </div>
+</div>
+
+<script>
+  document
+    .getElementById("signupForm")
+    .addEventListener("submit", function (e) {
+      var firstName = document.getElementById("first_name").value.trim();
+      var lastName = document.getElementById("last_name").value.trim();
+      var email = document.getElementById("email").value.trim();
+      var password = document.getElementById("password").value;
+
+      if (!firstName || !lastName || !email || !password) {
+        e.preventDefault();
+        alert("Please fill in all fields.");
+        return;
+      }
+
+      if (password.length < 4) {
+        e.preventDefault();
+        alert("Password must be at least 4 characters.");
+        return;
+      }
+    });
+</script>
+
+{% endblock %}

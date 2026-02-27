@@ -1,0 +1,82 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">Post a New Job</h1>
+  <p class="lead mb-0">
+    Find talented freelancers to bring your project to life
+  </p>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <form id="postForm" method="post" action="">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="title" class="form-label fw-bold">Job Title</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="title"
+              name="title"
+              placeholder="e.g., Website Design, Mobile App Development"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label fw-bold"
+              >Detailed Description</label
+            >
+            <textarea
+              class="form-control"
+              id="description"
+              name="description"
+              rows="6"
+              placeholder="Describe your project, requirements, and expectations..."
+            ></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="budget" class="form-label fw-bold">Budget (SLE)</label>
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="budget"
+              name="budget"
+              placeholder="e.g., 50000 or leave blank"
+              required
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
+            📝 Post Job
+          </button>
+          <p class="text-muted small mt-3 text-center mb-0">
+            Applications will start coming in within minutes of posting!
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("postForm").addEventListener("submit", function (e) {
+    var title = document.getElementById("title").value.trim();
+    var desc = document.getElementById("description").value.trim();
+    var budget = document.getElementById("budget").value;
+    if (!title || !desc || !budget) {
+      e.preventDefault();
+      alert("Please fill in all fields.");
+    }
+  });
+</script>
+{% endblock %}

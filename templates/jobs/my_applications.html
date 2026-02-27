@@ -1,0 +1,78 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">My Applications</h1>
+  <p class="lead mb-0">Track your job applications and follow-ups</p>
+</div>
+
+{% if applications %}
+<div class="mb-4">
+  <h5>
+    Applied to
+    <span class="badge bg-primary">{{ applications|length }}</span> jobs
+  </h5>
+</div>
+
+<div class="row g-3">
+  {% for app in applications %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card h-100 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">{{ app.job.title }}</h5>
+        <p class="card-text text-muted small mb-2">
+          💼
+          <strong>{{ app.job.owner.get_full_name }}</strong>
+        </p>
+        <p class="card-text small mb-3">
+          💰 <strong>SLE {{ app.job.budget }}</strong>
+        </p>
+        <div class="mb-3">
+          <span class="badge bg-success">{{ app.status|capfirst }}</span>
+          <span class="badge bg-secondary">{{ app.job.status|capfirst }}</span>
+        </div>
+        <small class="d-block text-muted mb-3"
+          >📅 Applied: {{ app.created_at|date:"M d, Y" }}</small
+        >
+      </div>
+      <div class="card-footer bg-white border-top">
+        {% if app.status == 'accepted' %}
+        <a
+          class="btn btn-primary btn-sm w-100"
+          href="{% url 'conversation' app.job.id app.job.owner.id %}"
+          >💬 Message Client</a
+        >
+        {% elif app.status == 'rejected' %}
+        <form method="post" action="{% url 'delete_application' app.id %}">
+          {% csrf_token %}
+          <button
+            type="submit"
+            class="btn btn-outline-danger btn-sm w-100"
+            onclick="return confirm('Delete this rejected application?');"
+          >
+            🗑️ Delete
+          </button>
+        </form>
+        {% else %}
+        <small class="text-muted d-block text-center"
+          >Waiting for client response...</small
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="text-center py-5 bg-light rounded">
+  <p class="lead text-muted mb-3">📭 You haven't applied to any jobs yet</p>
+  <a href="{% url 'available_jobs' %}" class="btn btn-primary btn-lg"
+    >Browse available jobs</a
+  >
+</div>
+{% endif %} {% endblock %}

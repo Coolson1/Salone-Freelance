@@ -1,0 +1,115 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Header Section -->
+<section
+  class="py-5 bg-gradient text-white"
+  style="background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%)"
+>
+  <div class="container text-center">
+    <h1 class="display-5 fw-bold mb-2">Choose Your Role</h1>
+    <p class="lead mb-0">Get started in seconds</p>
+  </div>
+</section>
+
+<!-- Role Selection Cards -->
+<div class="container py-5">
+  <div class="row g-4 justify-content-center">
+    <!-- Client Card -->
+    <div class="col-12 col-lg-6">
+      <div
+        class="card h-100 shadow-sm border-top border-4"
+        style="border-top-color: #f97316 !important"
+      >
+        <div class="card-body text-center">
+          <div style="font-size: 3rem; margin-bottom: 15px">💼</div>
+          <h2 class="card-title fw-bold text-dark">I'm a Client</h2>
+          <p class="text-muted mb-4">
+            I want to post projects and hire skilled freelancers
+          </p>
+
+          <!-- Client Features -->
+          <div
+            class="alert alert-light border border-pink mb-4"
+            style="
+              border-color: #fbcfe8 !important;
+              background-color: #fdf2f8 !important;
+            "
+          >
+            <p class="mb-2 fw-bold text-danger">What you can do:</p>
+            <ul class="list-unstyled text-muted mb-0">
+              <li class="mb-1">✓ Post job listings instantly</li>
+              <li class="mb-1">✓ Review freelancer applications</li>
+              <li class="mb-1">✓ Chat with candidates</li>
+              <li class="mb-0">✓ Get work completed on time</li>
+            </ul>
+          </div>
+
+          <a
+            href="{% url 'signup_client' %}"
+            class="btn btn-warning btn-lg w-100 fw-bold"
+          >
+            ✨ Continue as Client
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Freelancer Card -->
+    <div class="col-12 col-lg-6">
+      <div
+        class="card h-100 shadow-sm border-top border-4"
+        style="border-top-color: #10b981 !important"
+      >
+        <div class="card-body text-center">
+          <div style="font-size: 3rem; margin-bottom: 15px">🚀</div>
+          <h2 class="card-title fw-bold text-dark">I'm a Freelancer</h2>
+          <p class="text-muted mb-4">I want to find projects and earn money</p>
+
+          <!-- Freelancer Features -->
+          <div
+            class="alert alert-light border mb-4"
+            style="
+              border-color: #dcfce7 !important;
+              background-color: #f0fdf4 !important;
+            "
+          >
+            <p class="mb-2 fw-bold text-success">What you can do:</p>
+            <ul class="list-unstyled text-muted mb-0">
+              <li class="mb-1">✓ Browse available job listings</li>
+              <li class="mb-1">✓ Apply to jobs matching your skills</li>
+              <li class="mb-1">✓ Communicate directly with clients</li>
+              <li class="mb-0">✓ Earn and build your portfolio</li>
+            </ul>
+          </div>
+
+          <a
+            href="{% url 'signup_freelancer' %}"
+            class="btn btn-success btn-lg w-100 fw-bold"
+          >
+            🌟 Continue as Freelancer
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Login Link -->
+  <div class="text-center mt-4">
+    <p class="text-muted">
+      Already have an account?
+      <a
+        href="{% url 'login' %}"
+        class="link-primary fw-bold text-decoration-none"
+        >Login here</a
+      >
+    </p>
+  </div>
+
+  <!-- Tip Section -->
+  <div class="alert alert-info border-start border-4 mt-5 text-center mb-0">
+    <p class="mb-0">
+      💡 <strong>Tip:</strong> You can change roles anytime from your account
+      settings after signing up.
+    </p>
+  </div>
+</div>
+{% endblock %}

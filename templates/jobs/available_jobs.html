@@ -1,0 +1,63 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">Find Your Next Opportunity</h1>
+  <p class="lead mb-0">Browse available jobs and showcase your skills</p>
+</div>
+
+{% if jobs %}
+<div
+  class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2"
+>
+  <h5 class="mb-0">
+    Found <span class="badge bg-primary">{{ jobs|length }}</span> available jobs
+  </h5>
+</div>
+
+<div class="row g-3">
+  {% for job in jobs %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div
+      class="card h-100 shadow-sm hover-shadow"
+      style="transition: all 0.3s ease"
+    >
+      <div class="card-body">
+        <h5 class="card-title">{{ job.title }}</h5>
+        {% if job.owner %}
+        <p class="card-text text-muted small">
+          📋 By:
+          <strong
+            >{{ job.owner.get_full_name|default:job.owner.username }}</strong
+          >
+        </p>
+        {% endif %}
+        <p class="card-text text-muted">
+          {{ job.description|truncatechars:120 }}
+        </p>
+        <div class="mb-3">
+          <p class="mb-1"><strong>💰 Budget:</strong> SLE {{ job.budget }}</p>
+          <span class="badge bg-success">{{ job.status|capfirst }}</span>
+        </div>
+      </div>
+      <div class="card-footer bg-white border-top">
+        <a
+          class="btn btn-primary btn-sm w-100"
+          href="{% url 'apply_job' job.id %}"
+          >Apply Now →</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="text-center py-5 bg-light rounded">
+  <p class="lead text-muted mb-0">📭 No jobs posted yet. Check back soon!</p>
+</div>
+{% endif %} {% endblock %}

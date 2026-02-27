@@ -1,0 +1,1011 @@
+/* Main stylesheet for Freelance Marketplace
+   Modern color palette with cohesive, complementary colors.
+   Full-width sections with responsive design. */
+
+/* Color Palette:
+   Primary Dark: #1f2937 (charcoal)
+   Primary Blue: #3b82f6 (bright blue)
+   Accent Orange: #f97316 (warm orange)
+   Success Green: #10b981 (teal)
+   Light: #f9fafb (off-white)
+   White: #ffffff
+*/
+
+/* ------------------------------------------------------------------
+   Sticky footer layout using flexbox
+   All rules are global; no position:absolute or fixed needed.
+   ------------------------------------------------------------------ */
+
+html,
+body {
+  /* ensure viewport-filling height so flex works correctly */
+  height: 100%;
+  margin: 0; /* reset browser defaults */
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #f9fafb;
+  color: #1f2937;
+  line-height: 1.6;
+  display: flex; /* body acts as flex container */
+  flex-direction: column;
+}
+
+/* outer wrapper that contains every page element */
+.layout {
+  flex: 1; /* grow to fill body */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* at least viewport height */
+}
+
+/* main section stretches between navbar and footer */
+.main-content {
+  flex: 1;
+}
+
+/* ensure footer is pushed to bottom of layout */
+footer {
+  margin-top: auto;
+  padding-top: 2rem; /* extra breathing room above footer */
+}
+
+/* ------------------------------------------------------------------ */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1f2937;
+  padding: 15px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.navbar a {
+  text-decoration: none;
+  color: #f9fafb;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+.navbar a:hover {
+  color: #3b82f6;
+}
+.navbar .messages-link {
+  background: #f97316;
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white !important;
+}
+.navbar .user-greeting {
+  color: #f9fafb;
+}
+
+/* Buttons */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  background-color: #3b82f6;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 500;
+}
+.button:hover {
+  background-color: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+.button.button-primary {
+  background-color: #10b981;
+}
+.button.button-primary:hover {
+  background-color: #059669;
+}
+.button.button-secondary {
+  background-color: #f9fafb;
+  color: #1f2937;
+  border: 2px solid #3b82f6;
+}
+.button.button-secondary:hover {
+  background-color: #e5e7eb;
+}
+.button.logout-button {
+  background-color: #ef4444;
+}
+.button.logout-button:hover {
+  background-color: #dc2626;
+}
+.button-lg {
+  padding: 12px 28px;
+  font-size: 16px;
+}
+
+/* Cards */
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+}
+
+/* Forms */
+form {
+  width: 100%;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #1f2937;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  transition: border-color 0.2s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4 {
+  margin-top: 0;
+  color: #1f2937;
+}
+h1 {
+  font-size: 2.5rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.5rem;
+}
+
+/* Full-Width Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1f2937 0%, #3b82f6 100%);
+  color: #ffffff;
+  padding: 100px 20px;
+  text-align: center;
+  margin: -20px -20px 0;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+.hero-subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+  line-height: 1.6;
+  font-weight: 300;
+}
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+/* How It Works Section */
+.how-it-works {
+  background-color: #f9fafb;
+  padding: 60px 20px;
+  margin: 0 -20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.how-it-works h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1f2937;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.feature-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+  border-left: 4px solid #3b82f6;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+.feature-card h3 {
+  color: #1f2937;
+  margin: 15px 0;
+}
+.feature-steps {
+  text-align: left;
+}
+.step {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+  color: white;
+  border-radius: 50%;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.step p {
+  margin: 0;
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+.step strong {
+  color: #1f2937;
+}
+
+/* Benefits Section */
+.benefits {
+  background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+  color: #ffffff;
+  padding: 60px 20px;
+  margin: 0 -20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.benefits h2 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #ffffff;
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.benefit-item {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+.benefit-item:hover {
+  transform: translateY(-5px);
+}
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.benefit-item h4 {
+  color: #ffffff;
+  margin: 10px 0 12px 0;
+}
+.benefit-item p {
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+}
+
+/* CTA Footer Section */
+.cta-footer {
+  background: linear-gradient(135deg, #1f2937 0%, #10b981 100%);
+  color: #ffffff;
+  padding: 60px 20px;
+  text-align: center;
+  margin: 0 -20px;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+.small-text {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Job cards and lists */
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.job-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+  border: 2px solid transparent;
+}
+.job-item:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+.job-item h2 {
+  font-size: 1.25rem;
+  margin: 0 0 10px 0;
+  color: #1f2937;
+}
+.job-owner {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 5px 0 10px 0;
+}
+.job-status {
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  border-radius: 20px;
+  font-weight: 600;
+  margin: 5px 0;
+}
+.job-status.open {
+  background: #d1fae5;
+  color: #065f46;
+}
+.job-status.in_progress {
+  background: #dbeafe;
+  color: #1e40af;
+}
+.job-status.completed {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* Job actions */
+.job-actions {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+}
+.inline-form {
+  display: inline;
+}
+
+/* Application and Conversation lists */
+.application-list,
+.conversation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application-item,
+.conversation-item {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+  border-left: 4px solid #3b82f6;
+}
+
+/* Messages/chat */
+.message-thread {
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+.message {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  clear: both;
+}
+.message.sent {
+  background: #3b82f6;
+  color: #ffffff;
+  float: right;
+  text-align: right;
+}
+.message.received {
+  background: #e5e7eb;
+  color: #1f2937;
+  float: left;
+}
+.message .timestamp {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+
+/* Auth pages */
+.auth-container {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+.auth-form {
+  text-align: left;
+}
+.error-message,
+.error {
+  color: #dc2626;
+  font-size: 0.9rem;
+}
+.login-link {
+  margin-top: 20px;
+  text-align: center;
+}
+.login-link a {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+}
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  .hero {
+    padding: 60px 20px;
+  }
+  .hero-cta {
+    flex-direction: column;
+  }
+  .button-lg {
+    width: 100%;
+  }
+  .features-grid,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-buttons {
+    flex-direction: column;
+  }
+  .job-list {
+    grid-template-columns: 1fr;
+  }
+  .message {
+    max-width: 90%;
+  }
+  .navbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .navbar-left,
+  .navbar-right {
+    width: 100%;
+    justify-content: center;
+  }
+  h1 {
+    font-size: 1.8rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+  .button {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+  .hero-title {
+    font-size: 1.5rem;
+  }
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  .feature-card,
+  .application-item {
+    padding: 15px;
+  }
+  .job-item {
+    padding: 15px;
+  }
+}
+
+/* Hero section */
+.hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.hero-subtitle {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+  line-height: 1.6;
+}
+.hero-cta {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.button-lg {
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.button-secondary {
+  background-color: #ffffff;
+  color: #667eea;
+  border: 2px solid #ffffff;
+}
+.button-secondary:hover {
+  background-color: transparent;
+  color: #ffffff;
+}
+.hero-login {
+  margin-top: 15px;
+  opacity: 0.9;
+  font-size: 0.95rem;
+}
+.hero-login a {
+  color: #fff;
+  text-decoration: underline;
+}
+.hero-login a:hover {
+  opacity: 0.8;
+}
+.authenticated-hero {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 40px 30px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+.authenticated-hero h2 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+  color: #fff;
+}
+.authenticated-hero p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  opacity: 0.95;
+}
+.user-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.how-it-works {
+  padding: 60px 20px;
+  background-color: #f8f9fa;
+}
+.how-it-works h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #222;
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.feature-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+.feature-card h3 {
+  font-size: 1.5rem;
+  margin: 15px 0 20px 0;
+}
+.feature-steps {
+  text-align: left;
+}
+.step {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+  align-items: flex-start;
+}
+.step:last-child {
+  margin-bottom: 0;
+}
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+.step p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.5;
+}
+.step p strong {
+  color: #222;
+}
+.benefits {
+  padding: 60px 20px;
+  background: #fff;
+}
+.benefits h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #222;
+}
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.benefit-item {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 25px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+.benefit-item:hover {
+  background: #e9ecef;
+}
+.benefit-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+.benefit-item h4 {
+  font-size: 1.15rem;
+  margin: 10px 0 12px 0;
+  color: #222;
+}
+.benefit-item p {
+  font-size: 0.95rem;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+.cta-footer {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+.cta-footer h2 {
+  font-size: 2rem;
+  margin: 0 0 10px 0;
+}
+.cta-footer > p:first-of-type {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.small-text {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+/* Responsive home page */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem;
+  }
+  .hero-cta {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .button-lg {
+    width: 100%;
+  }
+  .user-actions {
+    flex-direction: column;
+  }
+  .user-actions .button {
+    width: 100%;
+  }
+  .features-grid,
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  .cta-buttons {
+    flex-direction: column;
+  }
+}
+
+/* Job cards and lists */
+.job-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+.job-item {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.job-item h2 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+}
+.job-owner {
+  font-size: 0.9rem;
+  color: #666;
+}
+.job-status {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.8rem;
+  border-radius: 12px;
+}
+
+/* Actions in job listings */
+.job-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.job-actions .button,
+.job-actions .inline-form {
+  margin-bottom: 5px;
+}
+.inline-form {
+  display: inline;
+}
+.inline-form .button {
+  margin-right: 0;
+}
+
+.job-status.open {
+  background: #28a745;
+  color: #fff;
+}
+.job-status.in_progress {
+  background: #17a2b8;
+  color: #fff;
+}
+.job-status.completed {
+  background: #6c757d;
+  color: #fff;
+}
+
+/* Application list/table */
+.application-list,
+.conversation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application-item,
+.conversation-item {
+  background: #fff;
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 15px;
+}
+
+/* Messages/chat bubbles */
+.message-thread {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  background: #e9ecef;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+.message {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  margin-bottom: 10px;
+  clear: both;
+  position: relative;
+}
+.message.sent {
+  background: #007bff;
+  color: #fff;
+  float: right;
+  text-align: right;
+}
+.message.received {
+  background: #fff;
+  color: #333;
+  float: left;
+}
+.message .timestamp {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 4px;
+}
+.chat-input {
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  padding: 10px 0;
+}
+.chat-input textarea {
+  width: calc(100% - 90px);
+  vertical-align: top;
+}
+
+/* Auth pages */
+.auth-container {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.auth-form {
+  text-align: left;
+}
+.error-message,
+.error {
+  color: #dc3545;
+}
+.login-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .home-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+  .job-list {
+    grid-template-columns: 1fr;
+  }
+}

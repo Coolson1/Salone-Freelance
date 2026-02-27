@@ -1,0 +1,95 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">💬 Conversation</h1>
+  <p class="lead mb-0">About: {{ job.title }}</p>
+</div>
+
+<div class="row">
+  <div class="col-12 col-md-10 col-lg-8 mx-auto">
+    <div class="alert alert-info border-start border-4 mb-4">
+      <p class="mb-1">📄 <strong>Job:</strong> {{ job.title }}</p>
+      <small class="text-muted"
+        >With: {{ other.get_full_name|default:other.username }}</small
+      >
+    </div>
+
+    <div
+      class="card mb-4 shadow-sm"
+      style="max-height: 500px; overflow-y: auto"
+    >
+      <div class="card-body p-3">
+        {% if messages %} {% for msg in messages %}
+        <div
+          class="mb-3 d-flex {% if msg.sender == user %}justify-content-end{% else %}justify-content-start{% endif %}"
+        >
+          <div
+            class="{% if msg.sender == user %}bg-primary text-white{% else %}bg-light text-dark{% endif %} p-3 rounded"
+            style="max-width: 70%; word-wrap: break-word"
+          >
+            <small class="fw-bold d-block mb-1"
+              >{{ msg.sender.get_full_name|default:msg.sender.username }}</small
+            >
+            <p class="mb-2" style="white-space: pre-wrap; margin: 0">
+              {{ msg.content }}
+            </p>
+            <small
+              class="{% if msg.sender == user %}text-white-50{% else %}text-muted{% endif %}"
+              >🕐 {{ msg.timestamp|date:'M d, H:i' }}</small
+            >
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p class="text-center text-muted mb-0">
+          🤝 No messages yet. Start the conversation!
+        </p>
+        {% endif %}
+      </div>
+    </div>
+
+    <form
+      action="{% url 'conversation' job.id other.id %}"
+      method="post"
+      class="mb-4"
+    >
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="content" class="form-label fw-bold">Send a Message</label>
+        <textarea
+          class="form-control"
+          name="content"
+          id="content"
+          rows="4"
+          placeholder="Type your message here..."
+        ></textarea>
+      </div>
+      <button class="btn btn-primary btn-lg w-100 fw-bold" type="submit">
+        Send Message ➤
+      </button>
+    </form>
+
+    <div class="d-flex gap-2 flex-wrap">
+      <a href="{% url 'home' %}" class="btn btn-outline-secondary flex-grow-1"
+        >Back to Home</a
+      >
+      <form
+        action="{% url 'clear_chat' job.id other.id %}"
+        method="post"
+        style="flex-grow: 1"
+        onsubmit="return confirm('Are you sure? This cannot be undone.');"
+      >
+        {% csrf_token %}
+        <button class="btn btn-danger w-100" type="submit">
+          🗑️ Clear Chat
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

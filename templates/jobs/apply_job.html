@@ -1,0 +1,89 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">Apply for Job</h1>
+  <p class="lead mb-0">Submit your application and impress the client</p>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-6">
+    <div class="alert alert-info border-start border-4 mb-4">
+      <h5 class="mb-2">{{ job.title }}</h5>
+      <p class="mb-1 small"><strong>💰 Budget:</strong> SLE {{ job.budget }}</p>
+      <p class="mb-0 small text-muted">
+        {{ job.description|truncatechars:200 }}
+      </p>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        <form id="applyForm" method="post" action="">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="applicant_name" class="form-label fw-bold"
+              >Your Name</label
+            >
+            <input
+              type="text"
+              class="form-control form-control-lg"
+              id="applicant_name"
+              name="applicant_name"
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="proposal" class="form-label fw-bold"
+              >Cover Letter / Proposal</label
+            >
+            <textarea
+              class="form-control"
+              id="proposal"
+              name="proposal"
+              rows="6"
+              placeholder="Tell the client why you're the best fit for this job..."
+            ></textarea>
+            <small class="d-block text-muted mt-2"
+              >💡 Tip: A detailed proposal increases your chances of getting
+              accepted</small
+            >
+          </div>
+
+          <button
+            type="submit"
+            class="btn btn-primary btn-lg w-100 fw-bold mb-2"
+          >
+            Send Application
+          </button>
+          <a
+            href="{% url 'available_jobs' %}"
+            class="btn btn-outline-secondary btn-lg w-100"
+            >Cancel</a
+          >
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("applyForm").addEventListener("submit", function (e) {
+    var name = document.getElementById("applicant_name").value.trim();
+    var proposal = document.getElementById("proposal").value.trim();
+    if (!name || !proposal) {
+      e.preventDefault();
+      alert("Please complete both fields.");
+      return;
+    }
+    alert("Application submitted!");
+  });
+</script>
+
+{% endblock %}

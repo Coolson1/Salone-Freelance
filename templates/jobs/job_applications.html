@@ -1,0 +1,114 @@
+{% extends 'base.html' %} {% block content %}
+
+<div
+  class="mb-5 p-4 bg-gradient text-white rounded"
+  style="
+    background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%) !important;
+  "
+>
+  <h1 class="display-4 mb-2">Job Applications</h1>
+  <p class="lead mb-0">Review and respond to freelancer applications</p>
+</div>
+
+<div class="mb-4">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'my_jobs' %}">My Jobs</a></li>
+      <li class="breadcrumb-item active">{{ job.title }}</li>
+    </ol>
+  </nav>
+  <div class="alert alert-info">
+    <h6 class="mb-1">{{ job.title }}</h6>
+    <p class="mb-1 small">{{ job.description|truncatechars:200 }}</p>
+    <small
+      ><strong>Status:</strong>
+      <span class="badge bg-secondary">{{ job.status|capfirst }}</span></small
+    >
+  </div>
+
+  {% if job.status == 'in_progress' and job.owner == user %}
+  <form action="{% url 'complete_job' job.id %}" method="post" class="mb-3">
+    {% csrf_token %}
+    <button class="btn btn-success btn-sm" type="submit">
+      ✓ Mark as Completed
+    </button>
+  </form>
+  {% endif %}
+</div>
+
+{% if applications %}
+<div class="mb-4">
+  <h5>
+    Received
+    <span class="badge bg-primary">{{ applications|length }}</span>
+    application{{ applications|length|pluralize }}
+  </h5>
+</div>
+
+<div class="row g-3">
+  {% for app in applications %}
+  <div class="col-12 col-md-6 col-lg-4">
+    <div class="card shadow-sm h-100">
+      <div class="card-body">
+        <h6 class="card-title">{{ app.applicant_name }}</h6>
+        <p class="card-text small text-muted mb-2">
+          {{ app.proposal|truncatechars:150|linebreaks }}
+        </p>
+        <div class="mb-3">
+          <span class="badge bg-{{ app.status }}"
+            >{{ app.status|capfirst }}</span
+          >
+        </div>
+        <small class="d-block text-muted"
+          >📅 Submitted: {{ app.created_at|date:"M d, H:i" }}</small
+        >
+      </div>
+      <div class="card-footer bg-white border-top">
+        {% if job.owner == user and app.status == 'pending' %}
+        <div class="d-flex gap-2">
+          <form
+            action="{% url 'accept_application' app.id %}"
+            method="post"
+            style="flex: 1"
+          >
+            {% csrf_token %}
+            <button class="btn btn-success btn-sm w-100" type="submit">
+              Accept
+            </button>
+          </form>
+          <form
+            action="{% url 'reject_application' app.id %}"
+            method="post"
+            style="flex: 1"
+          >
+            {% csrf_token %}
+            <button class="btn btn-danger btn-sm w-100" type="submit">
+              Reject
+            </button>
+          </form>
+        </div>
+        {% elif app.status == 'accepted' %}
+        <a
+          class="btn btn-primary btn-sm w-100"
+          href="{% url 'conversation' job.id app.applicant_user.id %}"
+          >💬 Message</a
+        >
+        {% else %}
+        <small class="d-block text-center text-muted"
+          >Waiting for your response...</small
+        >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% else %}
+<div class="text-center py-5 bg-light rounded">
+  <h5 class="text-muted mb-3">💼 No applications yet</h5>
+  <p class="text-muted mb-0">
+    Share your job posting to receive applications from freelancers
+  </p>
+</div>
+{% endif %} {% endblock %}

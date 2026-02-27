@@ -1,0 +1,354 @@
+{% extends 'base.html' %} {% block content %}
+
+<!-- Hero Section -->
+<section
+  class="py-5 text-center"
+  style="
+    background: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 50px;
+  "
+>
+  <div class="container py-5">
+    <h1 class="display-4 fw-bold mb-3">The Future of Work Is Here</h1>
+    <p class="lead mb-4">
+      Connect with talented professionals or find your next opportunity. Build
+      amazing things together.
+    </p>
+
+    {% if not user.is_authenticated %}
+    <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+      <a href="{% url 'signup_client' %}" class="btn btn-light btn-lg fw-bold"
+        >💼 Hire Talent</a
+      >
+      <a
+        href="{% url 'signup_freelancer' %}"
+        class="btn btn-outline-light btn-lg fw-bold"
+        >🚀 Find Work</a
+      >
+    </div>
+    <p>
+      Already registered?
+      <a
+        href="{% url 'login' %}"
+        class="text-white fw-bold text-decoration-none"
+        >Sign in here</a
+      >
+    </p>
+    {% else %}
+    <!-- Authenticated User Dashboard -->
+    <h2 class="mb-3">
+      Welcome Back, {{ user.first_name|default:user.username }}! 👋
+    </h2>
+    {% if user.profile.role == 'client' %}
+    <p class="lead mb-4">Ready to bring your project to life?</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="{% url 'post_job' %}" class="btn btn-light btn-lg fw-bold"
+        >📝 Post a New Job</a
+      >
+      <a href="{% url 'my_jobs' %}" class="btn btn-outline-light btn-lg"
+        >View My Jobs</a
+      >
+    </div>
+    {% elif user.profile.role == 'freelancer' %}
+    <p class="lead mb-4">Explore exciting opportunities waiting for you.</p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="{% url 'available_jobs' %}" class="btn btn-light btn-lg fw-bold"
+        >💼 Browse Jobs</a
+      >
+      <a href="{% url 'my_applications' %}" class="btn btn-outline-light btn-lg"
+        >My Applications</a
+      >
+    </div>
+    {% endif %} {% endif %}
+  </div>
+</section>
+
+<!-- How It Works Section (visible only when not authenticated) -->
+{% if not user.is_authenticated %}
+<section class="py-5 mb-5">
+  <div class="container">
+    <h2 class="text-center mb-5 fw-bold">How It Works</h2>
+
+    <div class="row g-4">
+      <!-- For Clients -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="text-center mb-4">
+              <div style="font-size: 3rem">📝</div>
+              <h3 class="card-title mt-3">For Clients</h3>
+            </div>
+            <div class="card-text">
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-primary rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >1</span
+                  >
+                </div>
+                <div>
+                  <strong>Post a Job</strong> - Describe your project and budget
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-primary rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >2</span
+                  >
+                </div>
+                <div>
+                  <strong>Review Proposals</strong> - Get applications from
+                  talented freelancers
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-primary rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >3</span
+                  >
+                </div>
+                <div>
+                  <strong>Collaborate</strong> - Chat and manage your project
+                  together
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-primary rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >4</span
+                  >
+                </div>
+                <div>
+                  <strong>Complete</strong> - Mark jobs done and leave feedback
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- For Freelancers -->
+      <div class="col-lg-6">
+        <div class="card h-100 border-0 shadow-sm">
+          <div class="card-body">
+            <div class="text-center mb-4">
+              <div style="font-size: 3rem">💼</div>
+              <h3 class="card-title mt-3">For Freelancers</h3>
+            </div>
+            <div class="card-text">
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-success rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >1</span
+                  >
+                </div>
+                <div>
+                  <strong>Browse Jobs</strong> - Explore opportunities in your
+                  field
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-success rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >2</span
+                  >
+                </div>
+                <div>
+                  <strong>Apply</strong> - Submit your proposal and showcase
+                  yourself
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-success rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >3</span
+                  >
+                </div>
+                <div>
+                  <strong>Get Hired</strong> - Start working with clients who
+                  value your skills
+                </div>
+              </div>
+              <div class="mb-3 d-flex gap-3">
+                <div style="min-width: 40px">
+                  <span
+                    class="badge bg-success rounded-circle"
+                    style="
+                      width: 40px;
+                      height: 40px;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1.2rem;
+                    "
+                    >4</span
+                  >
+                </div>
+                <div>
+                  <strong>Earn & Build</strong> - Get paid and build your
+                  reputation
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Benefits Section -->
+<section
+  class="py-5 mb-5"
+  style="background-color: #f3f4f6; border-radius: 12px"
+>
+  <div class="container">
+    <h2 class="text-center mb-5 fw-bold">Why Choose Us?</h2>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 text-center shadow-sm">
+          <div class="card-body">
+            <div style="font-size: 2.5rem; margin-bottom: 15px">🔒</div>
+            <h5 class="card-title">Secure & Reliable</h5>
+            <p class="card-text text-muted">
+              Safe work environment with clear communication channels and
+              transparent processes.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 text-center shadow-sm">
+          <div class="card-body">
+            <div style="font-size: 2.5rem; margin-bottom: 15px">⚡</div>
+            <h5 class="card-title">Fast & Efficient</h5>
+            <p class="card-text text-muted">
+              Quick turnaround times, instant messaging, and streamlined project
+              management.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 text-center shadow-sm">
+          <div class="card-body">
+            <div style="font-size: 2.5rem; margin-bottom: 15px">🌍</div>
+            <h5 class="card-title">Global Community</h5>
+            <p class="card-text text-muted">
+              Connect with talented professionals from around the world—talent
+              knows no borders.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div class="card h-100 border-0 text-center shadow-sm">
+          <div class="card-body">
+            <div style="font-size: 2.5rem; margin-bottom: 15px">💰</div>
+            <h5 class="card-title">Fair Pricing</h5>
+            <p class="card-text text-muted">
+              Set your own rates (freelancers) or budgets (clients)—complete
+              control over compensation.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Footer Section -->
+{% if not user.is_authenticated %}
+<section
+  class="py-5 text-center"
+  style="
+    background: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+    color: white;
+    border-radius: 12px;
+    margin-bottom: 30px;
+  "
+>
+  <div class="container py-5">
+    <h2 class="display-5 fw-bold mb-3">Ready to Get Started?</h2>
+    <p class="lead mb-4">
+      Join thousands of successful clients and freelancers today.
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+      <a href="{% url 'signup_client' %}" class="btn btn-light btn-lg fw-bold"
+        >Sign Up as Client</a
+      >
+      <a
+        href="{% url 'signup_freelancer' %}"
+        class="btn btn-outline-light btn-lg fw-bold"
+        >Sign Up as Freelancer</a
+      >
+    </div>
+    <p class="small">⏱️ It only takes 2 minutes to create your account.</p>
+  </div>
+</section>
+{% endif %} {% endblock %}

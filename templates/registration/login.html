@@ -1,0 +1,79 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="row justify-content-center py-5">
+  <div class="col-12 col-md-6 col-lg-5">
+    <div class="mb-5 text-center">
+      <h1 class="display-5 fw-bold mb-2">Welcome Back 👋</h1>
+      <p class="lead text-muted">Login to your account</p>
+    </div>
+
+    <div class="card shadow-sm">
+      <div class="card-body p-4">
+        {% if form.non_field_errors %}
+        <div
+          class="alert alert-danger alert-dismissible fade show"
+          role="alert"
+        >
+          {% for error in form.non_field_errors %}
+          <p class="mb-0">❌ {{ error }}</p>
+          {% endfor %}
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+          ></button>
+        </div>
+        {% endif %}
+
+        <form method="post">
+          {% csrf_token %}
+
+          <div class="mb-3">
+            <label for="id_username" class="form-label fw-bold"
+              >Email Address</label
+            >
+            {{ form.username }} {% if form.username.errors %}
+            <div class="text-danger small mt-2">{{ form.username.errors }}</div>
+            {% endif %}
+          </div>
+
+          <div class="mb-3">
+            <label for="id_password" class="form-label fw-bold">Password</label>
+            {{ form.password }} {% if form.password.errors %}
+            <div class="text-danger small mt-2">{{ form.password.errors }}</div>
+            {% endif %}
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <p class="text-muted mb-1">Don't have an account?</p>
+      <a href="{% url 'choose_role' %}" class="btn btn-outline-primary btn-sm"
+        >Sign up here</a
+      >
+    </div>
+
+    <div class="alert alert-info alert-sm mt-4 mb-0" role="alert">
+      <small class="d-block text-center mb-0"
+        >📝 Use your email and password to login</small
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  #id_username,
+  #id_password {
+    width: 100%;
+  }
+  .form-control {
+    border: 1px solid #d1d5db;
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="display-6 fw-bold">My Conversations</h1>
+      <p class="text-muted">
+        Chat with clients and freelancers about your projects
+      </p>
+    </div>
+  </div>
+
+  {% if conversations %}
+  <div class="row g-3">
+    {% for convo in conversations %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">{{ convo.job.title }}</h5>
+          <p class="card-text text-muted mb-2">
+            {{ convo.other_user.get_full_name }}
+          </p>
+          {% if convo.unread_count > 0 %}
+          <span class="badge bg-danger mb-2"
+            >{{ convo.unread_count }} unread</span
+          >
+          {% endif %}
+          <p class="text-muted small mb-0">
+            <em>Last message: {{ convo.last_message_time }}</em>
+          </p>
+        </div>
+        <div class="card-footer bg-white border-top">
+          <a
+            class="btn btn-primary w-100"
+            href="{% url 'conversation' convo.job.id convo.other_user.id %}"
+          >
+            Open Conversation
+          </a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center" role="alert">
+    <h5 class="alert-heading">No Conversations Yet</h5>
+    <p class="mb-0">
+      You don't have any active conversations. Start by applying to jobs or
+      reviewing applications!
+    </p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container py-5">
+  <div class="row mb-4">
+    <div class="col-12">
+      <h1 class="display-6 fw-bold">Available Jobs</h1>
+      <p class="text-muted">Browse and apply to jobs that match your skills</p>
+    </div>
+  </div>
+
+  {% if jobs %}
+  <div class="row g-4">
+    {% for job in jobs %}
+    <div class="col-12 col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title fw-bold text-dark">{{ job.title }}</h5>
+          <p class="card-text text-muted">
+            {{ job.description|truncatechars:100 }}
+          </p>
+        </div>
+        <div class="card-footer bg-white border-top">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-success">SLE {{ job.budget }}</span>
+          </div>
+          <a class="btn btn-primary w-100" href="{% url 'apply_job' job.id %}"
+            >Apply Now</a
+          >
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="alert alert-info text-center" role="alert">
+    <h5 class="alert-heading">No Jobs Available</h5>
+    <p class="mb-0">There are currently no jobs posted. Check back soon!</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
